@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Pokemon, PokemonListItem, SortOption } from '../types/Pokemon';
+import { Pokemon, SortOption } from '../types/Pokemon';
 import { pokemonApi } from '../services/pokemonApi';
 import LoadingSpinner from './LoadingSpinner';
 import './ListView.css';
 
 const ListView: React.FC = () => {
-  const [pokemonList, setPokemonList] = useState<PokemonListItem[]>([]);
   const [pokemonDetails, setPokemonDetails] = useState<Pokemon[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState<SortOption>({ property: 'name', direction: 'asc' });
@@ -19,7 +18,6 @@ const ListView: React.FC = () => {
         setLoading(true);
         setError(null);
         const response = await pokemonApi.getPokemonList(151, 0);
-        setPokemonList(response.results);
         
         // Fetch detailed data for all Pokemon
         const details = await Promise.all(

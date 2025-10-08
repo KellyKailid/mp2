@@ -7,7 +7,6 @@ import './GalleryView.css';
 
 const GalleryView: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [availableTypes, setAvailableTypes] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<FilterOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +36,6 @@ const GalleryView: React.FC = () => {
         });
         
         const sortedTypes = Array.from(types).sort();
-        setAvailableTypes(sortedTypes);
         setSelectedTypes(sortedTypes.map(type => ({ type, selected: false })));
       } catch (err) {
         setError('Failed to load Pokemon data');
